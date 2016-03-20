@@ -37,18 +37,21 @@ module.exports = function(passport) {
         next(new Error('No token'));
       } else {
         var user_Id = jwt.decode(token, 'secret');
+        console.log(user_Id);
         //decode userid as token, attempt to find user
         User.findOne({
-            _id: user_Id
+            _id: user_Id.id
           })
           .then(function(foundUser) {
             if (foundUser) {
-              res.send(200);
+              res.status(200);
+              res.json({message:"OK"});
             } else {
               res.send(401);
+              res.json({message:"Not Authorized"});
             }
           })
-          .fail(function(error) {
+          .catch(function(error) {
             next(error);
           });
       }

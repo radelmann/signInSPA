@@ -9,7 +9,9 @@ var cleanInput = function(req, res, next) {
 module.exports = function(app, passport) {
   var user = require('./controllers/user.js')(passport);
 
-  app.post('/register', cleanInput, ,user.register);
+  app.post('/register', cleanInput, user.register);
 
   app.post('/login', cleanInput, user.login);
+
+  app.post('/isAuth', user.isAuth);
 }
