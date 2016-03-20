@@ -1,0 +1,18 @@
+{
+  "name": "signInSPA",
+  "authors": [
+    "radelmann <robadelmann@gmail.com>"
+  ],
+  "description": "signInSPA - signIn single page app built with Angular",
+  "main": "index.html",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
