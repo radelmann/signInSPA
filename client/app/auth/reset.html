@@ -1,8 +1,27 @@
 <div id='signup'>
-  <h1>Reset</h1>
-  <form name="signupForm" ng-submit='reset()'>
-    <input type="password" ng-model='user.password'>
-    <button>Submit</button>
+  <h1><span class="fa fa-sign-in"></span> Reset</h1>
+  <div class="clearfix">
+    <div class="alert alert-danger" ng-model="error" ng-hide="error === ''">
+      {{error}}
+    </div>
+    <div class="alert alert-info" ng-model="info" ng-hide="info === ''">
+      {{info}}
+    </div>
+    
+    <form name="signupForm" ng-submit='reset()'>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" ng-model='user.password' required>
+      </div>
+      <div class="form-group">
+        <label>Confirm Password</label>
+        <input type="password" ng-model='user.confirmPassword' required>
+      </div>
+      <button type="submit" class="btn btn-primary btn-lg pull-right">Submit</button>
+    </div>
   </form>
-  <a href="#/login"><strong>Login here</strong></a>
+  <hr>
+  <p>
+    <a href="#/login"><strong>Login here</strong></a>
+  </p>
 </div>

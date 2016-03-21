@@ -2,19 +2,25 @@
   <h1><span class="fa fa-sign-in"></span> Register</h1>
   
   <div class="clearfix">
-    
+    <div class="alert alert-danger" ng-model="error" ng-hide="error === ''">
+      {{error}}
+    </div>
+
+    <div class="alert alert-info" ng-model="info" ng-hide="info === ''">
+      {{info}}
+    </div>
     <form name="signupForm" ng-submit='register()'> 
       <div class="form-group">
         <label>Email</label>
-        <input class="form-control" type='text' ng-model='user.email'>
+        <input class="form-control" type='email' ng-model='user.email' required>
       </div>
       <div class="form-group">
         <label>Password</label>
-        <input class="form-control" type="password" ng-model='user.password'>
+        <input class="form-control" id="password" type="password" ng-model='user.password' required>
       </div>
       <div class="form-group">
         <label>Confirm Password</label>
-        <input class="form-control" type="password" ng-model='user.confirmPassword'>
+        <input class="form-control" type="password" ng-model='user.confirmPassword' id="confirmPassword" required>
       </div>
       <button type="submit" class="btn btn-primary btn-lg pull-right">Register</button>
     </form>

@@ -18,8 +18,6 @@ angular.module('signin.auth', [])
   };
 
   $scope.register = function() {
-    //todo field validation
-    
     Auth.register($scope.user)
       .then(function(token) {
         $window.localStorage.setItem('com.signin', token);
@@ -32,8 +30,9 @@ angular.module('signin.auth', [])
 
   $scope.forgot = function() {
     Auth.forgot($scope.user)
-      .then(function(message) {
-        $scope.info = message;
+      .then(function(data) {
+        $scope.info = data.message ? data.message : "";
+        $scope.error = data.error ? data.error : "";
       })
       .catch(function(error) {
         $scope.error = error.data.message;
@@ -42,11 +41,29 @@ angular.module('signin.auth', [])
 
   $scope.reset = function() {
     Auth.reset($scope.user, $routeParams.token)
-      .then(function(message) {
-        $scope.info = data.message;
+      .then(function(data) {
+        $scope.info = data.message ? data.message : "";
+        $scope.error = data.error ? data.error : "";
       })
       .catch(function(error) {
         $scope.error = error.data.message;
       });
   };
+
+  var initValidators = function() {
+    var password = document.getElementById("password");
+    var confirm_password = document.getElementById("confirmPassword");
+
+    $scope.validatePassword = function() {
+      if (password.value != confirm_password.value) {
+        confirm_password.setCustomValidity("Passwords Don't Match");
+      } else {
+        confirm_password.setCustomValidity('');
+      }
+    }
+
+    password.onchange = $scope.validatePassword;
+    confirm_password.onkeyup = $scope.validatePassword;
+  }
+  initValidators();
 });

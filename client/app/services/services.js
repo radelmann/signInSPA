@@ -30,7 +30,7 @@ angular.module('signin.services', [])
         data: user
       })
       .then(function(resp) {
-        return resp.data.message;
+        return resp.data;
       });
   };
 
@@ -41,7 +41,7 @@ angular.module('signin.services', [])
         data: user
       })
       .then(function(resp) {
-        return resp.data.message;
+        return resp.data;
       });
   };
 
