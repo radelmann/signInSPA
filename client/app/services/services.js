@@ -34,10 +34,10 @@ angular.module('signin.services', [])
       });
   };
 
-  var reset = function(user) {
+  var reset = function(user, token) {
     return $http({
         method: 'POST',
-        url: '/reset/', //attach token here
+        url: '/reset/'+token,
         data: user
       })
       .then(function(resp) {

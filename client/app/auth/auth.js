@@ -1,6 +1,6 @@
 angular.module('signin.auth', [])
 
-.controller('AuthController', function($scope, $window, $location, $stateParams, Auth) {
+.controller('AuthController', function($scope, $window, $location, $routeParams, Auth) {
   $scope.user = {};
 
   $scope.login = function() {
@@ -36,7 +36,7 @@ angular.module('signin.auth', [])
   };
 
   $scope.reset = function() {
-    Auth.reset($scope.user, $stateParams.token)
+    Auth.reset($scope.user, $routeParams.token)
       .then(function(data) {
         //todo display message
       })
