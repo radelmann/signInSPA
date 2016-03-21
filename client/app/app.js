@@ -2,33 +2,41 @@ angular.module('signin', [
     'signin.services',
     //'signin.account',
     'signin.auth',
-    'ngRoute'
+    'ngRoute',
+    'ui.router'
   ])
-  .config(function ($routeProvider, $httpProvider) {
-    $routeProvider
-      .when('/login', {
+  
+  .config(function ($routeProvider, $stateProvider, $sceProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise('/signin')
+    $stateProvider
+      .state('login', {
+        url:'/login',
         templateUrl: 'app/auth/login.html',
         controller: 'AuthController'
       })
-      .when('/register', {
+      .state('/register', {
+        url:'register',
         templateUrl: 'app/auth/register.html',
         controller: 'AuthController'
       })
-      .when('/forgot', {
+      .state('/forgot', {
+        url:'forgot',
         templateUrl: 'app/auth/forgot.html',
         controller: 'AuthController'
       })
-      .when('/reset', {
+      .state('/reset', {
+        url:'reset/:token',
         templateUrl: 'app/auth/reset.html',
         controller: 'AuthController'
       })
-      // .when('/account', {
+      // .state('/account', {
       //   templateUrl: 'app/account/account.html',
       //   controller: 'AccountController'
       // })
-      .otherwise('/login');
+    
     $httpProvider.interceptors.push('AttachTokens');
   })
+  //todo state and route provider
   .factory('AttachTokens', function ($window) {
     var attach = {
       request: function (object) {

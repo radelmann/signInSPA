@@ -1,46 +1,46 @@
 angular.module('signin.auth', [])
 
-.controller('AuthController', function ($scope, $window, $location,$routeParams, Auth) {
+.controller('AuthController', function($scope, $window, $location, $stateParams, Auth) {
   $scope.user = {};
 
-  $scope.login = function () {
+  $scope.login = function() {
     Auth.login($scope.user)
-      .then(function (token) {
+      .then(function(token) {
         $window.localStorage.setItem('com.signin', token);
         $location.path('/account');
       })
-      .catch(function (error) {
+      .catch(function(error) {
         console.error(error);
       });
   };
 
-  $scope.register = function () {
+  $scope.register = function() {
     Auth.register($scope.user)
-      .then(function (token) {
+      .then(function(token) {
         $window.localStorage.setItem('com.signin', token);
         $location.path('/account');
       })
-      .catch(function (error) {
+      .catch(function(error) {
         console.error(error);
       });
   };
 
-  $scope.forgot = function () {
+  $scope.forgot = function() {
     Auth.forgot($scope.user)
-      .then(function (data) {
+      .then(function(data) {
         //todo display message
       })
-      .catch(function (error) {
+      .catch(function(error) {
         console.error(error);
       });
   };
 
-  $scope.reset = function () {
-    Auth.reset($scope.user, )//todo get url param
-      .then(function (data) {
+  $scope.reset = function() {
+    Auth.reset($scope.user, $stateParams.token)
+      .then(function(data) {
         //todo display message
       })
-      .catch(function (error) {
+      .catch(function(error) {
         console.error(error);
       });
   };
