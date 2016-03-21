@@ -21,6 +21,8 @@ app.use(bodyParser.urlencoded({
 
 app.use(passport.initialize());
 
+app.use(express.static('client'));
+
 require('./config/passport')(passport);
 require('./routes.js')(app, passport);
 
