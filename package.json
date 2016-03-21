@@ -4,7 +4,8 @@
   "description": "signInSPA - signIn single page application built with angular",
   "main": "server/server.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "start": "gulp"
   },
   "author": "radelmann",
   "license": "MIT",

@@ -2,24 +2,23 @@
 <html ng-app='signin'>
   <head>
     <meta charset="utf-8" />
-    <title>Shortly</title>
+    <title>signIn</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
-    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <link rel="stylesheet" href="/css/styles.css"> <!-- custom -->
   </head>
   <body>
     <div class='container'>
-      
-      <h1>SignIn</h1>
       <!-- the ng-view directive is where our templates will be loaded into when naviagted to -->
       <div ng-view=""></div>
     </div>
     
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-    <script src="app/auth/auth.js"></script>
-    <script src="app/services/services.js"></script>
-    <script src="app/app.js"></script>
+    <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
+    <script src="/bower_components/angular-route/angular-route.min.js"></script>
+    <!-- <script src="/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script> -->
+    
+    <script src="/app/auth/auth.js"></script>
+    <script src="/app/services/services.js"></script>
+    <script src="/app/app.js"></script>
   </body>
 </html>
