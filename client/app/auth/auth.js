@@ -1,6 +1,6 @@
 angular.module('signin.auth', [])
 
-.controller('AuthController', function ($scope, $window, $location, Auth) {
+.controller('AuthController', function ($scope, $window, $location,$routeParams, Auth) {
   $scope.user = {};
 
   $scope.login = function () {
@@ -19,6 +19,26 @@ angular.module('signin.auth', [])
       .then(function (token) {
         $window.localStorage.setItem('com.signin', token);
         $location.path('/account');
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
+  };
+
+  $scope.forgot = function () {
+    Auth.forgot($scope.user)
+      .then(function (data) {
+        //todo display message
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
+  };
+
+  $scope.reset = function () {
+    Auth.reset($scope.user, )//todo get url param
+      .then(function (data) {
+        //todo display message
       })
       .catch(function (error) {
         console.error(error);

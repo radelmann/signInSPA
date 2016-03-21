@@ -14,6 +14,14 @@ angular.module('signin', [
         templateUrl: 'app/auth/register.html',
         controller: 'AuthController'
       })
+      .when('/forgot', {
+        templateUrl: 'app/auth/forgot.html',
+        controller: 'AuthController'
+      })
+      .when('/reset', {
+        templateUrl: 'app/auth/reset.html',
+        controller: 'AuthController'
+      })
       // .when('/account', {
       //   templateUrl: 'app/account/account.html',
       //   controller: 'AccountController'

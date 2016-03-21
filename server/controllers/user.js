@@ -1,7 +1,10 @@
-//var crypto = require('crypto');
+var crypto = require('crypto');
 var User = require('../models/user.js');
 var mail = require('../config/mail.js');
 var jwt = require('jwt-simple');
+
+var Q = require('q');
+var getToken = Q.denodeify(crypto.randomBytes);
 
 module.exports = function(passport) {
   return {
@@ -14,15 +17,21 @@ module.exports = function(passport) {
         }
 
         if (!user) {
-          res.status(401); 
-          res.json({message: info});
+          res.status(401);
+          res.json({
+            message: info
+          });
         }
 
         //user has authenticated correctly thus we create a JWT token 
         //encode user id as token
-        var token = jwt.encode({id: user._id}, 'secret');
+        var token = jwt.encode({
+          id: user._id
+        }, 'secret');
         res.status(200);
-        res.json({token: token});
+        res.json({
+          token: token
+        });
 
       })(req, res, next);
     },
@@ -45,10 +54,14 @@ module.exports = function(passport) {
           .then(function(foundUser) {
             if (foundUser) {
               res.status(200);
-              res.json({message:"OK"});
+              res.json({
+                message: "OK"
+              });
             } else {
               res.send(401);
-              res.json({message:"Not Authorized"});
+              res.json({
+                message: "Not Authorized"
+              });
             }
           })
           .catch(function(error) {
@@ -66,17 +79,97 @@ module.exports = function(passport) {
         }
 
         if (!user) {
-          res.status(401); 
-          res.json({message: info});
+          res.status(401);
+          res.json({
+            message: info
+          });
         }
 
         //user has authenticated correctly thus we create a JWT token 
         //encode user id as token
-        var token = jwt.encode({id: user._id}, 'secret');
+        var token = jwt.encode({
+          id: user._id
+        }, 'secret');
         res.status(200);
-        res.json({token: token});
+        res.json({
+          token: token
+        });
 
-      })(req, res, next);  
+      })(req, res, next);
+    },
+
+    forgot: function(req, res, next) {
+      getToken(20)
+        .then(function(buffer) {
+          token = buffer.toString('hex');
+          return User.findOne({
+            email: req.body.email,
+            type: 'local'
+          });
+        })
+        .then(function(user) {
+          if (!user) {
+            res.status(200);
+            res.json({
+              error: "No account with that email address exists."
+            });
+          } else {
+            user.resetPasswordToken = token;
+            user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+            return user.save();
+          }
+        })
+        .then(function(user) {
+          mail.sendForgot(user.email, req.headers.host, token, function(err, results) {
+              res.status(200);
+              res.json({
+                message: "An e-mail has been sent to " + user.email + " with further instructions."
+              });
+            })
+            .catch(function(err) {
+              next(err);
+            });
+        });
+    },
+
+    reset: function(req, res, next) {
+      User.findOne({
+          resetPasswordToken: req.params.token,
+          resetPasswordExpires: {
+            $gt: Date.now()
+          }
+        })
+        .then(function(user) {
+          if (!user) {
+            res.status(200);
+            res.json({
+              error: 'Password reset token is invalid or has expired.'
+            });
+          }
+
+          user.password = user.generateHash(req.body.password);
+          user.resetPasswordToken = undefined;
+          user.resetPasswordExpires = undefined;
+
+          user.save(function(err, saved) {
+              if (err) {
+                next(err);
+              }
+              mail.sendReset(user.email, function(err, results) {
+                if (err) {
+                  next(err);
+                }
+                res.status(200);
+                res.json({
+                  info: "Success! Your password has been changed."
+                });
+              });
+            },
+            function(err) {
+              console.log(err);
+              next(err);
+            });
+        });
     }
   }
 }

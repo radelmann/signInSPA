@@ -43,7 +43,7 @@ module.exports.sendForgot = function (toEmail, host, token, cb) {
 
   var content = ['You are receiving this because you have requested the reset of the password for your account.',
     'Please click on the following link, or paste this into your browser to complete the process:',
-    '<a href="http://' + host + '/reset/' + token + '">Click here to reset your password</a>.',
+    '<a href="http://' + host + '/#reset/' + token + '">Click here to reset your password</a>.',
     'If you did not request this, please ignore this email and your password will remain unchanged.', 'signIn Inc.'
   ].join('<br><br>');
 
