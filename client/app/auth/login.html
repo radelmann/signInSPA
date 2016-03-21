@@ -1,17 +1,28 @@
 <div id='signin'>
-  <h1><span class="fa fa-sign-in"></span>Login</h1>
+  <h1><span class="fa fa-sign-in"></span> Login</h1>
   <div class='clearfix'>
+    
+    <div class="alert alert-danger" ng-model="error" ng-hide="error === ''">
+      {{error}}
+    </div>
+
+    <div class="alert alert-info" ng-model="info" ng-hide="info === ''">
+      {{info}}
+    </div>
+
     <form name="signinForm" ng-submit='login()'>
       <div class="form-group">
         <label>Email</label>
-        <input type="email" class="form-control" name="email" ng-model='user.email' required>
+        <input type="email" class="form-control" ng-model='user.email' required>
       </div>
       <div class="form-group">
         <label>Password</label>
-        <input type="password" class="form-control" name="password" ng-model='user.password' required>
+        <input type="password" class="form-control" ng-model='user.password' required>
       </div>
       <button type="submit" class="btn btn-primary btn-lg pull-right">Login</button>
     </form>
-    <p><a href="/#register">Create an account</a> or <a href="/#">return to home page</a>.</p>
+    <p><a href="/#forgot">Forgot your password?</a></p>
   </div>
+  <hr>
+  <p><a href="/#register">Create an account</a> or <a href="/#">return to home page</a>.</p>
 </div>
