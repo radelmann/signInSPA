@@ -15,5 +15,11 @@ module.exports = function(app, passport) {
   app.post('/forgot', cleanInput, user.forgot);
   app.post('/reset/:token', cleanInput, user.reset);
 
-  app.get('/user/:id',user.isAuth, user.get);
+  app.get('/user/:token', user.isAuth, user.get);
+
+  app.get('/auth/facebook', passport.authenticate('facebook', {
+    scope: 'email'
+  }));
+
+  app.get('/auth/facebook/callback',user.fblogin);
 }

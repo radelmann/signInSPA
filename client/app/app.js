@@ -6,6 +6,10 @@ angular.module('signin', [
   ])
   .config(function ($routeProvider, $httpProvider) {
     $routeProvider
+    .when('/home', {
+        templateUrl: 'app/auth/home.html',
+        controller: 'AuthController'
+      })
       .when('/login', {
         templateUrl: 'app/auth/login.html',
         controller: 'AuthController'
@@ -22,11 +26,11 @@ angular.module('signin', [
         templateUrl: 'app/auth/reset.html',
         controller: 'AuthController'
       })
-      .when('/account/:id', {
+      .when('/account/:token', {
         templateUrl: 'app/account/account.html',
         controller: 'AccountController'
       })
-      .otherwise('/login');
+      .otherwise('/home');
     $httpProvider.interceptors.push('AttachTokens');
   })
   .factory('AttachTokens', function ($window) {

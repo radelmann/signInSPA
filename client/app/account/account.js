@@ -6,7 +6,7 @@ angular.module('signin.account', [])
   $scope.info = '';
   $scope.error = '';
 
-  Auth.get($routeParams.id)
+  Auth.get($routeParams.token)
     .then(function(data) {
       console.log(data.user)
       $scope.user = data.user ? data.user : {};

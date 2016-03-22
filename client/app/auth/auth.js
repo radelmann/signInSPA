@@ -11,7 +11,7 @@ angular.module('signin.auth', [])
       .then(function(data) {
         console.log(data);
         $window.localStorage.setItem('com.signin', data.token);
-        $location.path('/account/'+data.id);
+        $location.path('/account/'+data.token);
       })
       .catch(function(error) {
         $scope.error = error.data.message;
@@ -22,7 +22,7 @@ angular.module('signin.auth', [])
     Auth.register($scope.user)
       .then(function(data) {
         $window.localStorage.setItem('com.signin', data.token);
-        $location.path('/account/'+data.id);
+        $location.path('/account/'+data.token);
       })
       .catch(function(error) {
         $scope.error = error.data.message;
