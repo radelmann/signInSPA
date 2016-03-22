@@ -43,6 +43,7 @@ angular.module('signin.auth', [])
   $scope.reset = function() {
     Auth.reset($scope.user, $routeParams.token)
       .then(function(data) {
+        console.log(data);
         $scope.info = data.message ? data.message : "";
         $scope.error = data.error ? data.error : "";
       })

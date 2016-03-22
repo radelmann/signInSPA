@@ -165,12 +165,11 @@ module.exports = function(passport) {
                 }
                 res.status(200);
                 res.json({
-                  info: "Success! Your password has been changed."
+                  message: "Success! Your password has been changed."
                 });
               });
             },
             function(err) {
-              console.log(err);
               next(err);
             });
         });

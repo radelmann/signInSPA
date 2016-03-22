@@ -14,5 +14,7 @@ module.exports = function(app, passport) {
   app.post('/isAuth', user.isAuth);
   app.post('/forgot', cleanInput, user.forgot);
   app.post('/reset/:token', cleanInput, user.reset);
+
+  //todo check auth
   app.get('/user/:id', user.get);
 }
