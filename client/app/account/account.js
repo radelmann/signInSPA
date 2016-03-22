@@ -15,4 +15,8 @@ angular.module('signin.account', [])
     .catch(function(error) {
       $scope.error = error.data.message;
     });
+
+  $scope.signout = function() {
+    Auth.signout();
+  }
 });

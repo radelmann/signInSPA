@@ -61,7 +61,7 @@ angular.module('signin.services', [])
 
   var signout = function() {
     $window.localStorage.removeItem('com.signin');
-    $location.path('/signin');
+    $location.path('/#/login');
   };
 
   return {
