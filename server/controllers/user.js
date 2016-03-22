@@ -28,9 +28,12 @@ module.exports = function(passport) {
         var token = jwt.encode({
           id: user._id
         }, 'secret');
+        
         res.status(200);
+
         res.json({
-          token: token
+          token: token,
+          id: user._id
         });
 
       })(req, res, next);
@@ -92,7 +95,8 @@ module.exports = function(passport) {
         }, 'secret');
         res.status(200);
         res.json({
-          token: token
+          token: token,
+          id: user._id
         });
 
       })(req, res, next);
@@ -169,6 +173,26 @@ module.exports = function(passport) {
               console.log(err);
               next(err);
             });
+        });
+    },
+
+    get: function(req, res, next) {
+      User.findOne({
+          _id: req.params.id
+        })
+        .then(function(user) {
+          if (!user) {
+            res.status(404);
+            res.json({
+              error: 'User not found.'
+            });
+          }
+
+          res.status(200);
+          res.json({user:user});
+        })
+        .catch(function(err) {
+          next(err);
         });
     }
   }

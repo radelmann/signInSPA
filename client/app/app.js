@@ -1,6 +1,6 @@
 angular.module('signin', [
     'signin.services',
-    //'signin.account',
+    'signin.account',
     'signin.auth',
     'ngRoute'
   ])
@@ -22,10 +22,10 @@ angular.module('signin', [
         templateUrl: 'app/auth/reset.html',
         controller: 'AuthController'
       })
-      // .when('/account', {
-      //   templateUrl: 'app/account/account.html',
-      //   controller: 'AccountController'
-      // })
+      .when('/account/:id', {
+        templateUrl: 'app/account/account.html',
+        controller: 'AccountController'
+      })
       .otherwise('/login');
     $httpProvider.interceptors.push('AttachTokens');
   })

@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="alert alert-danger" ng-model="error" ng-hide="error === ''">
+    {{error}}
+  </div>
+
+  <div class="page-header text-center">
+    <h1><span class="fa fa-gear"></span> User Account Page</h1>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="well clearfix">
+        
+        <h3 class="text-warning" ng-hide="user.type!='local'"><span class="fa fa-user"></span> Local</h3>
+        <h3 class="text-primary" ng-hide="user.type!='facebook'"><span class="fa fa-facebook"></span> Facebook</h3>
+        <h3 class="text-info" ng-hide="user.type!='twitter'"><span class="fa fa-twitter"></span> Twitter</h3>  
+        <h3 class="text-info" ng-hide="user.type!='google'"><span class="fa fa-google-plus"></span> Google</h3>
+        
+        <p>
+          <strong>id</strong>: {{ user._id }}<br>
+          <strong>name</strong>: {{ user.name }}<br>
+          <strong>email</strong>: {{ user.email }}<br>
+          <a href="/logout" class="btn btn-primary btn-lg pull-right">Logout</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

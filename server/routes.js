@@ -12,8 +12,7 @@ module.exports = function(app, passport) {
   app.post('/register', cleanInput, user.register);
   app.post('/login', cleanInput, user.login);
   app.post('/isAuth', user.isAuth);
-
   app.post('/forgot', cleanInput, user.forgot);
-  // app.get('/reset/:token', user.reset.get);
   app.post('/reset/:token', cleanInput, user.reset);
+  app.get('/user/:id', user.get);
 }

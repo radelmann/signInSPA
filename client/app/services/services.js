@@ -8,7 +8,7 @@ angular.module('signin.services', [])
         data: user
       })
       .then(function(resp) {
-        return resp.data.token;
+        return resp.data;
       });
   };
 
@@ -19,7 +19,7 @@ angular.module('signin.services', [])
         data: user
       })
       .then(function(resp) {
-        return resp.data.token;
+        return resp.data;
       });
   };
 
@@ -37,8 +37,18 @@ angular.module('signin.services', [])
   var reset = function(user, token) {
     return $http({
         method: 'POST',
-        url: '/reset/'+token,
+        url: '/reset/' + token,
         data: user
+      })
+      .then(function(resp) {
+        return resp.data;
+      });
+  };
+
+  var get = function(id) {
+    return $http({
+        method: 'GET',
+        url: '/user/' + id
       })
       .then(function(resp) {
         return resp.data;
@@ -60,6 +70,7 @@ angular.module('signin.services', [])
     isAuth: isAuth,
     signout: signout,
     forgot: forgot,
+    get:get,
     reset: reset
   };
 });

@@ -1,4 +1,4 @@
-<div id='signup'>
+<div id='signup' ng-init="initValidators()">
   <h1><span class="fa fa-sign-in"></span> Register</h1>
   
   <div class="clearfix">
@@ -10,6 +10,10 @@
       {{info}}
     </div>
     <form name="signupForm" ng-submit='register()'> 
+    <div class="form-group">
+        <label>Name</label>
+        <input class="form-control" type='text' ng-model='user.name' required>
+      </div>
       <div class="form-group">
         <label>Email</label>
         <input class="form-control" type='email' ng-model='user.email' required>

@@ -8,9 +8,10 @@ angular.module('signin.auth', [])
 
   $scope.login = function() {
     Auth.login($scope.user)
-      .then(function(token) {
-        $window.localStorage.setItem('com.signin', token);
-        $location.path('/account');
+      .then(function(data) {
+        console.log(data);
+        $window.localStorage.setItem('com.signin', data.token);
+        $location.path('/account/'+data.id);
       })
       .catch(function(error) {
         $scope.error = error.data.message;
@@ -19,9 +20,9 @@ angular.module('signin.auth', [])
 
   $scope.register = function() {
     Auth.register($scope.user)
-      .then(function(token) {
-        $window.localStorage.setItem('com.signin', token);
-        $location.path('/account');
+      .then(function(data) {
+        $window.localStorage.setItem('com.signin', data.token);
+        $location.path('/account/'+data.id);
       })
       .catch(function(error) {
         $scope.error = error.data.message;
@@ -50,7 +51,7 @@ angular.module('signin.auth', [])
       });
   };
 
-  var initValidators = function() {
+  $scope.initValidators = function() {
     var password = document.getElementById("password");
     var confirm_password = document.getElementById("confirmPassword");
 
@@ -65,5 +66,4 @@ angular.module('signin.auth', [])
     password.onchange = $scope.validatePassword;
     confirm_password.onkeyup = $scope.validatePassword;
   }
-  initValidators();
 });
